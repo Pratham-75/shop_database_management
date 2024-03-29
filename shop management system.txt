@@ -1,0 +1,190 @@
+CREATE TABLE AZIPCODE
+("ZIPCODE_ID" NUMBER,
+"ZIPCODE" NUMBER,
+"STATE" VARCHAR2(30),
+"CITY" VARCHAR2(30),
+CONSTRAINT "AZIPCODE_PK" PRIMARY KEY ("ZIPCODE_ID")
+);
+
+Insert into AZIPCODE (ZIPCODE_ID, ZIPCODE, STATE, CITY) VALUES (1, '110054', 'Delhi', 'Delhi');
+Insert into AZIPCODE (ZIPCODE_ID, ZIPCODE, STATE, CITY) VALUES (2, '263638', 'Uttrakhand', 'Almora');
+Insert into AZIPCODE (ZIPCODE_ID, ZIPCODE, STATE, CITY) VALUES (3, '110007', 'Delhi', 'Delhi');
+
+
+CREATE TABLE AADDRESS
+ ("ADDRESS_ID" NUMBER,
+"ADDRESS_LINE" VARCHAR2(30),
+"CUSTOMER_ID" NUMBER,
+"ZIPCODE_ID" NUMBER,
+CONSTRAINT "AADDRESS_PK" PRIMARY KEY ("ADDRESS_ID")
+);
+
+Insert into AADDRESS (ADDRESS_ID, ADDRESS_LINE, CUSTOMER_ID, ZIPCODE_ID) VALUES (1, '348 Timarpur', 1, 1);
+Insert into AADDRESS (ADDRESS_ID, ADDRESS_LINE, CUSTOMER_ID, ZIPCODE_ID) VALUES (2, '141 Almora', 2, 2);
+Insert into AADDRESS (ADDRESS_ID, ADDRESS_LINE, CUSTOMER_ID, ZIPCODE_ID) VALUES (3, '507 Burari',3, 3);
+
+
+CREATE TABLE APAYMENT
+ ("PAYMENT_ID" NUMBER,
+"PAYMENT_TYPE" VARCHAR2(30),
+"CUSTOMER_ID" NUMBER,
+"EMPLOYEE_ID" NUMBER,
+CONSTRAINT "APAYMENT_PK" PRIMARY KEY ("PAYMENT_ID")
+ )
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (1, 'Credit', 1, 1);
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (2, 'Cash', 2, 2);
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (3, 'Gpay',3, 3);
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (4, 'Phone Pay', 2, 2);
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (5, 'Debit', 3,1);
+Insert into APAYMENT (Payment_ID, Payment_Type, Customer_ID, Employee_ID) VALUES (6, 'Check', 1,3);
+
+delete from APAYMENT where payment_id = 6;
+select * from apayment;
+
+CREATE TABLE ACUSTOMER
+ ("CUSTOMER_ID" NUMBER,
+"FIRST_NAME" VARCHAR2(30),
+"LAST_NAME" VARCHAR2(30),
+"PHONE_NUMBER" NUMBER,
+"ADDRESS_ID" NUMBER,
+CONSTRAINT "ACUSTOMER_PK" PRIMARY KEY ("CUSTOMER_ID")
+ );
+
+Insert into ACUSTOMER (Customer_ID, First_Name, Last_Name, Phone_Number) VALUES (1, 'Pawan', 'Aryan', 8043565122);
+Insert into ACUSTOMER (Customer_ID, First_Name, Last_Name, Phone_Number) VALUES (2, 'Praveen', 'Kumar', 8046987564);
+Insert into ACUSTOMER (Customer_ID, First_Name, Last_Name, Phone_Number) VALUES (3, 'Ravi', 'Arya', 2526544891);
+
+
+CREATE TABLE AEMPLOYEE
+ ("EMPLOYEE_ID" NUMBER,
+"EMPFIRST_NAME" VARCHAR2(30),
+"EMPLAST_NAME" VARCHAR2(30),
+"SALARY" NUMBER,
+CONSTRAINT "AEMPLOYEE_PK" PRIMARY KEY ("EMPLOYEE_ID")
+ );
+
+Insert into AEMPLOYEE (Employee_ID, EmpFirst_name, EmpLast_Name, Salary) VALUES (1, 'Sourabh', 'Joshi', 30125);
+Insert into AEMPLOYEE (Employee_ID, EmpFirst_name, EmpLast_Name, Salary) VALUES (2, 'Rahul', 'Sharma', 25890);
+Insert into AEMPLOYEE (Employee_ID, EmpFirst_name, EmpLast_Name, Salary) VALUES (3, 'Sarah', 'Roy', 32540);
+
+
+CREATE TABLE AORDER
+ ("ORDER_ID" NUMBER,
+"CUSTOMER_ID" NUMBER,
+"SHIPPMENT_DURATION" NUMBER,
+"ORDER_DATE" DATE,
+"STATUS" VARCHAR2(30),
+CONSTRAINT "AORDER_PK" PRIMARY KEY ("ORDER_ID")
+);
+
+Insert into AORDER (Order_ID, Customer_ID, Shippment_Duration, Order_Date, Status) VALUES (1, 1, 3, TO_DATE ('2022/02/15', 'yyyy/mm/dd'), 'Shipped');
+Insert into AORDER (Order_ID, Customer_ID, Shippment_Duration, Order_Date, Status) VALUES (2, 2, 5, TO_DATE ('2022/03/05', 'yyyy/mm/dd'), 'Pending');
+Insert into AORDER (Order_ID, Customer_ID, Shippment_Duration, Order_Date, Status) VALUES (3, 3, 7, TO_DATE ('2022/03/18', 'yyyy/mm/dd'), 'Pending');
+
+CREATE TABLE AORDER_LINE
+ ("PRODUCT_ID" NUMBER,
+"ORDER_ID" NUMBER,
+"ORDER_DATE" DATE,
+"QUANTITY" NUMBER,
+CONSTRAINT "AORDER_LINE_PK" PRIMARY KEY ("PRODUCT_ID")
+ );
+
+INSERT INTO AORDER_LINE (PRODUCT_ID, ORDER_ID, ORDER_DATE, QUANTITY) VALUES (1, 1, TO_DATE ('2022/02/15', 'yyyy/mm/dd'), 2);
+INSERT INTO AORDER_LINE (PRODUCT_ID, ORDER_ID, ORDER_DATE, QUANTITY) VALUES (2, 2, TO_DATE ('2022/03/07', 'yyyy/mm/dd'), 4);
+INSERT INTO AORDER_LINE (PRODUCT_ID, ORDER_ID, ORDER_DATE, QUANTITY) VALUES (3, 3, TO_DATE ('2022/03/07', 'yyyy/mm/dd'), 6);
+
+CREATE TABLE AMENSCLOTHING
+ ( "MENSCLOTHING_ID" NUMBER,
+ "MENS_ACCESSORIES" VARCHAR2(30),
+ "SUIT_TYPES" VARCHAR2(30),
+ CONSTRAINT "MEN'SCLOTHING_PK" PRIMARY KEY ("MENSCLOTHING_ID")
+ );
+
+Insert into AMENSCLOTHING (MENSCLOTHING_ID, MENS_ACCESSORIES, SUIT_TYPES) VALUES (1,'Watches', 'Tuxedo');
+Insert into AMENSCLOTHING (MENSCLOTHING_ID, MENS_ACCESSORIES, SUIT_TYPES) VALUES (2,'Glasses', 'Wedding');
+Insert into AMENSCLOTHING (MENSCLOTHING_ID, MENS_ACCESSORIES, SUIT_TYPES) VALUES (3,'Headbands', 'Lounge'); 
+
+CREATE TABLE APRODUCT
+ ( "PRODUCT_ID" NUMBER,
+ "PRODUCT_NAME" VARCHAR2(30),
+ "GROUP_ID" NUMBER,
+ "SUPPLIER_ID" NUMBER,
+ CONSTRAINT "1PRODUCT_PK" PRIMARY KEY ("PRODUCT_ID")
+ );
+
+Insert into APRODUCT (Product_ID,Product_Name,GROUP_ID,Supplier_ID) VALUES (1,'T-shirt', 1, 1);
+Insert into APRODUCT (Product_ID,Product_Name,GROUP_ID,Supplier_ID) VALUES (2,'Shoes',2, 2);
+Insert into APRODUCT (Product_ID,Product_Name,GROUP_ID,Supplier_ID) VALUES (3,'Glasses',2, 3);
+
+delete from aproduct where product_id = 3;
+
+CREATE TABLE APRODUCTDETAIL
+ ( "PRODUCTDETAIL_ID" NUMBER,
+ "1SIZE" VARCHAR2(5),
+ "COLOR" VARCHAR2(30),
+ CONSTRAINT "1PRODUCTDETAIL_PK" PRIMARY KEY ("PRODUCTDETAIL_ID")
+ );
+
+drop table APRODUCTDETAIL
+Insert into APRODUCTDETAIL VALUES (1,'M','Blue');
+Insert into APRODUCTDETAIL VALUES (2,'L', 'White');
+Insert into APRODUCTDETAIL VALUES (3,'XL', 'Black'); 
+select * from APRODUCTDETAIL;
+
+CREATE TABLE APRODUCTGROUP
+ ( "GROUP_ID" NUMBER,
+ "GROUP_NAME" VARCHAR2(30),
+ CONSTRAINT "1PRODUCTGROUP_PK" PRIMARY KEY ("GROUP_ID")
+ );
+
+Insert into APRODUCTGROUP (Group_ID,Group_Name) VALUES (1,'Mens');
+Insert into APRODUCTGROUP (Group_ID,Group_Name) VALUES (2,'Womens');
+Insert into APRODUCTGROUP (Group_ID,Group_Name) VALUES (3,'Kids'); 
+
+CREATE TABLE KIDS
+ ( "KIDS_ID" NUMBER,
+ "ACCESSORIES" VARCHAR2(30),
+ "CLOTHING_TYPE" VARCHAR2(30),
+ CONSTRAINT "1KIDS_PK" PRIMARY KEY ("KIDS_ID")
+ );
+
+Insert into KIDS (kids_id,Accessories,Clothing_Type) VALUES (1,'Hats', 'Pants');
+Insert into KIDS (kids_id,Accessories,Clothing_Type) VALUES (2,'Belts', 'Shirts');
+Insert into KIDS (kids_id,Accessories,Clothing_Type) VALUES (3,'watches', 'Shoes'); 
+
+CREATE TABLE "AWOMENSCLOTHING"
+ ( "WOMENSCLOTHING_ID" NUMBER,
+ "WOMENS_ACCESSORIES" VARCHAR2(30),
+ "DRESS_TYPES" VARCHAR2(30),
+ CONSTRAINT "1WOMEN'SCLOTHING_PK" PRIMARY KEY ("WOMENSCLOTHING_ID")
+ );
+Insert into AWOMENSCLOTHING (WOMENSCLOTHING_ID,WOMENS_ACCESSORIES,DRESS_TYPES) VALUES (1,'Glasses', 'Slip');
+Insert into AWOMENSCLOTHING (WOMENSCLOTHING_ID,WOMENS_ACCESSORIES,DRESS_TYPES) VALUES (2,'Belts', 'Party');
+Insert into AWOMENSCLOTHING (WOMENSCLOTHING_ID,WOMENS_ACCESSORIES,DRESS_TYPES) VALUES (3,'Bows', 'Gown'); 
+
+CREATE TABLE ASUPPLIER
+ ( "SUPPLIER_ID" NUMBER,
+ "SUPPLIER_NAME" VARCHAR2(30),
+ "SUPPLIER_PHONE" NUMBER,
+ "SUPPLIER_EMAIL" VARCHAR2(30),
+ CONSTRAINT "1SUPPLIER_PK" PRIMARY KEY ("SUPPLIER_ID")
+ );
+
+Insert into ASUPPLIER (Supplier_ID,Supplier_Name,Supplier_Phone,Supplier_email) VALUES (1,'Walmart', 804352221, 'wal@walmart.com');
+Insert into ASUPPLIER (Supplier_ID,Supplier_Name,Supplier_Phone,Supplier_email) VALUES (2,'Target', 7032551666, 'tar@target.com');
+Insert into ASUPPLIER (Supplier_ID,Supplier_Name,Supplier_Phone,Supplier_email) VALUES (3,'BestBuy', 8045552544, 'Best@bestbuy.com'); 
+
+
+
+
+select * from aaddress;
+select * from azipcode;
+select * from acustomer;
+select * from apayment;
+select * from aemployee;
+select * from aorder;
+select * from aorder_line;
+select * from amensclothing;
+select * from kids;
+select * from aproduct;
+select * from asupplier;
